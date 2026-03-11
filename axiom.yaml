@@ -1,12 +1,21 @@
 name: axiom-vector-store
 version: 0.1.0
 language: python
-
-# nodes:
-#   - name: MyNode
-#     input: MyInput
-#     output: MyOutput
-#     # required_secrets lists the secret names this node reads via axiom.Secrets.
-#     # These are validated during publish and shown in the marketplace.
-#     # required_secrets:
-#     #   - MY_API_KEY
+description: Vector store nodes for upserting and querying embeddings in Pinecone.
+author: Axiom
+license: MIT
+nodes:
+    - name: PineconeWriter
+      input: UpsertRequest
+      output: UpsertResult
+      description: Upserts a vector and its source text into a Pinecone index.
+      required_secrets:
+        - PINECONE_API_KEY
+        - PINECONE_INDEX
+    - name: PineconeRetriever
+      input: QueryRequest
+      output: RetrievalResult
+      description: Performs a top-k nearest-neighbour search in a Pinecone index and returns the matching text chunks.
+      required_secrets:
+        - PINECONE_API_KEY
+        - PINECONE_INDEX

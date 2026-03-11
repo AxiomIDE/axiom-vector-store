@@ -18,3 +18,35 @@
 syntax = "proto3";
 
 package axiom_vector_store;
+
+// A request to upsert a vector into the store.
+message UpsertRequest {
+  // The dense embedding vector.
+  repeated float vector = 1;
+  // A unique identifier for this vector. Used for deduplication on upsert.
+  string id = 2;
+  // The original text this vector was generated from, stored as metadata.
+  string text = 3;
+}
+
+// The result of a vector upsert operation.
+message UpsertResult {
+  // The number of vectors successfully upserted.
+  int32 upserted_count = 1;
+}
+
+// A nearest-neighbour query against the vector store.
+message QueryRequest {
+  // The query vector to search with.
+  repeated float vector = 1;
+  // The number of nearest neighbours to return.
+  int32 top_k = 2;
+}
+
+// The result of a nearest-neighbour query.
+message RetrievalResult {
+  // The text of each retrieved chunk, ordered by similarity score.
+  repeated string chunks = 1;
+  // The similarity scores corresponding to each chunk.
+  repeated float scores = 2;
+}
