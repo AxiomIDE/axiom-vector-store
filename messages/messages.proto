@@ -23,8 +23,8 @@ package axiom_vector_store;
 message UpsertRequest {
   // The dense embedding vector.
   repeated float vector = 1;
-  // A unique identifier for this vector. Used for deduplication on upsert.
-  string id = 2;
+  // A unique identifier for this vector. Used for deduplication on upsert. Auto-generated when absent.
+  optional string id = 2;
   // The original text this vector was generated from, stored as metadata.
   string text = 3;
 }
@@ -39,8 +39,8 @@ message UpsertResult {
 message QueryRequest {
   // The query vector to search with.
   repeated float vector = 1;
-  // The number of nearest neighbours to return.
-  int32 top_k = 2;
+  // The number of nearest neighbours to return. Defaults to 5 when absent.
+  optional int32 top_k = 2;
   // The original question text, carried through for downstream prompt building.
   string question = 3;
 }
