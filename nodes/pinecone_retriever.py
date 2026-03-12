@@ -37,4 +37,4 @@ def pinecone_retriever(log: AxiomLogger, secrets: AxiomSecrets, input: QueryRequ
         scores.append(match.score)
 
     log.info("pinecone_retriever: retrieved", matches=len(chunks))
-    return RetrievalResult(chunks=chunks, scores=scores)
+    return RetrievalResult(chunks=chunks, scores=scores, question=input.question)

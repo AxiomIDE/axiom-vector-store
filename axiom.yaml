@@ -8,7 +8,8 @@ nodes:
     - name: PineconeWriter
       input: UpsertRequest
       output: UpsertResult
-      description: Upserts a vector and its source text into a Pinecone index.
+      type: pipeline
+      description: Upserts each incoming vector frame into a Pinecone index and streams one UpsertResult per frame.
       required_secrets:
         - PINECONE_API_KEY
         - PINECONE_INDEX
