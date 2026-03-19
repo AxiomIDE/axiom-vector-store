@@ -1,4 +1,4 @@
-name: christian/axiom-vector-store
+name: axiom-official/axiom-vector-store
 version: 0.1.0
 language: python
 description: Vector store nodes for upserting and querying embeddings in Pinecone.
