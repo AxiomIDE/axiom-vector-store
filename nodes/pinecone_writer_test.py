@@ -1,4 +1,4 @@
-from gen.messages_pb2 import UpsertRequest, UpsertResult
+from gen.messages_pb2 import UpsertRequest
 from nodes.pinecone_writer import pinecone_writer
 
 
@@ -16,10 +16,9 @@ class _NoOpSecrets:
 
 
 def test_pinecone_writer_missing_secret():
-    """Without secrets, the node should return upserted_count=0."""
+    """Without secrets, the node should yield nothing (early return)."""
     log = _NoOpLogger()
     secrets = _NoOpSecrets()
     req = UpsertRequest(vector=[0.1, 0.2, 0.3], id="vec-1", text="Hello Axiom")
-    result = pinecone_writer(log, secrets, req)
-    assert isinstance(result, UpsertResult)
-    assert result.upserted_count == 0
+    results = list(pinecone_writer(log, secrets, iter([req])))
+    assert results == []
